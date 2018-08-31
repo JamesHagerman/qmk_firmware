@@ -943,6 +943,7 @@ static void rgblight_effect_dummy(animation_status_t *anim) {
     **/
 }
 
+__attribute__((weak))
 void rgblight_task(void) {
     if (rgblight_status.timer_enabled) {
         effect_func_t effect_func   = rgblight_effect_dummy;

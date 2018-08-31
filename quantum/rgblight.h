@@ -380,7 +380,9 @@ void rgblight_mode_eeprom_helper(uint8_t mode, bool write_to_eeprom);
 void rgblight_show_solid_color(uint8_t r, uint8_t g, uint8_t b);
 
 #    ifdef RGBLIGHT_USE_TIMER
+__attribute__((weak)) // Allow keymaps to overload animation implementation
 void rgblight_task(void);
+
 void rgblight_timer_init(void);
 void rgblight_timer_enable(void);
 void rgblight_timer_disable(void);
