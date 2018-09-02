@@ -24,6 +24,8 @@
 #define TERM_7 LALT(KC_7)
 #define TERM_8 LALT(KC_8)
 
+#define SW_WIN LCTL(KC_GRV) 
+
 void matrix_init_user(void) { // Runs boot tasks for keyboard
   _delay_us(300); // Why do we need this?
   
@@ -68,10 +70,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
   [_AD] = LAYOUT(
-    TERM_3, TERM_4,  KC_UP,   TERM_5,  TERM_6,                KC_VOLU, KC_MS_BTN1, KC_MS_UP,   KC_MS_BTN2,  KC_BSPC, 
-    TERM_2, KC_LEFT, KC_DOWN, KC_RGHT, TERM_7,                KC_VOLD, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, KC_NO, 
-    TERM_1, KC_NO,   KC_NO,   KC_NO,   TERM_8,                KC_NO,   KC_ACL0,    KC_ACL1,    KC_ACL2,     KC_NO, 
-    KC_NO,  KC_NO,   KC_NO,   KC_TRNS, KC_NO, KC_NO, KC_NO,   KC_NO,   KC_TRNS,    KC_NO,      KC_NO,       KC_NO)
+    TERM_1,  TERM_2,  TERM_3,   TERM_4,  TERM_5,                   KC_VOLU, KC_MS_BTN1, KC_MS_UP,   KC_MS_BTN2,  KC_BSPC, 
+    KC_TAB,  KC_HOME, KC_UP,    KC_END,  TERM_6,                   KC_VOLD, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, KC_DEL, 
+    KC_NO,   KC_LEFT, KC_DOWN,  KC_RGHT, TERM_7,                   KC_MPLY, KC_MRWD,    KC_MFFD,    KC_NO,       KC_NO, 
+    KC_NO,   KC_NO,   SW_WIN,   KC_TRNS, KC_NO,  KC_LCTL, KC_LALT, KC_NO,   KC_TRNS,    KC_NO,      KC_NO,       KC_NO)
 };
 
 const uint16_t PROGMEM fn_actions[] = {
