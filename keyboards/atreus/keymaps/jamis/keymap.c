@@ -98,14 +98,28 @@ uint32_t layer_state_set_user(uint32_t state) {
   switch(biton32(state)) {
     case _RS:
       //rgblight_mode(1);
-      rgblight_setrgb(100,100,100);
+      //rgblight_setrgb(255,255,255);
       //rgblight_setrgb_at(0, 0, 0, 0);
       //rgblight_setrgb_at(0, 255, 0, 1);
+      
+      // deep blue
+      led[0].r = 100;
+      led[0].g = 0;
+      led[0].b = 255;
+      
+      // cyan
+      led[1].r = 0;
+      led[1].g = 200;
+      led[1].b = 255;
+
+      rgblight_set();
+
       break;
     case _LW:
       //rgblight_mode(1);
       //rgblight_setrgb(0, 255, 255);
       
+      // yellow
       led[0].r = 255;
       led[0].g = 255;
       led[0].b = 0;
@@ -121,43 +135,44 @@ uint32_t layer_state_set_user(uint32_t state) {
       //rgblight_setrgb_at(255, 0, 0, 2);
       //rgblight_setrgb_at(0, 255, 0, 1);
 
-      led[0].r = 255;
-      led[0].g = 0;
+      // lime green
+      led[0].r = 100;
+      led[0].g = 255;
       led[0].b = 0;
 
-      led[1].r = 0;
+      led[1].r = 90;
       led[1].g = 255;
       led[1].b = 0;
 
       rgblight_set();
       break;
     case _QW:
-      rgblight_mode(8);
+      //rgblight_mode(8);
       rgblight_setrgb(0,0,0);
       break;
     default:
       // Default layer stuff...
-      rgblight_mode(8);
+      //rgblight_mode(8);
       rgblight_setrgb(0,0,0);
       break;
   }
   return state;
 }
 
-void rgblight_task(void) {
-  static uint16_t derp_hue = 0;
-  static uint8_t last_timer = 0;
-
-  if (timer_elapsed(last_timer) < 1) {
-    return;
-  }
-  last_timer = timer_read();
-
-  derp_hue += 0x1F;
-  
-  if (layer_state == _QW) {
-    rgblight_sethsv_at(derp_hue>>8, 255, 255, 0);
-    rgblight_sethsv_at((derp_hue>>8)+127,255,255,1);
-  }
-
-}
+//void rgblight_task(void) {
+//  static uint16_t derp_hue = 0;
+//  static uint8_t last_timer = 0;
+//
+//  if (timer_elapsed(last_timer) < 1) {
+//    return;
+//  }
+//  last_timer = timer_read();
+//
+//  derp_hue += 0x1F;
+//  
+//  if (layer_state == _QW) {
+//    rgblight_sethsv_at(derp_hue>>8, 255, 255, 0);
+//    rgblight_sethsv_at((derp_hue>>8)+127,255,255,1);
+//  }
+//
+//}
