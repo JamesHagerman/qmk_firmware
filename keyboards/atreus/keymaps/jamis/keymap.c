@@ -71,9 +71,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_AD] = LAYOUT(
     TERM_1,  TERM_2,  TERM_3,   TERM_4,  TERM_5,                   KC_VOLU, KC_MS_BTN1, KC_MS_UP,   KC_MS_BTN2,  KC_BSPC, 
-    KC_TAB,  KC_HOME, KC_UP,    KC_END,  TERM_6,                   KC_VOLD, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, KC_DEL, 
-    KC_NO,   KC_LEFT, KC_DOWN,  KC_RGHT, TERM_7,                   KC_MPLY, KC_MRWD,    KC_MFFD,    KC_NO,       KC_NO, 
-    KC_NO,   KC_NO,   SW_WIN,   KC_TRNS, KC_NO,  KC_LCTL, KC_LALT, KC_NO,   KC_TRNS,    KC_NO,      KC_NO,       KC_NO)
+    KC_HOME, LCTL(KC_LEFT), KC_UP, LCTL(KC_RGHT), TERM_6,          KC_VOLD, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, KC_DEL, 
+    KC_END,  KC_LEFT, KC_DOWN,  KC_RGHT, TERM_7,                   KC_MPLY, KC_MRWD,    KC_MFFD,    KC_NO,       KC_NO, 
+    KC_NO,   KC_NO,   SW_WIN,   KC_TRNS, KC_LSFT, KC_LCTL, KC_LALT, KC_NO,   KC_TRNS,    KC_NO,      KC_NO,       KC_NO)
 };
 
 const uint16_t PROGMEM fn_actions[] = {
@@ -153,7 +153,7 @@ uint32_t layer_state_set_user(uint32_t state) {
     default:
       // Default layer stuff...
       //rgblight_mode(8);
-      rgblight_setrgb(0,0,0);
+      //rgblight_setrgb(0,0,0);
       break;
   }
   return state;

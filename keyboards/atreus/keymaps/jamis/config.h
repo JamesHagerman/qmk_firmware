@@ -18,8 +18,12 @@
 #define TAPPING_TERM 200
 
 // Make mouse stuff better
-#define MOUSEKEY_DELAY 0 // default 300
+#define MOUSEKEY_DELAY 10 // default 300
 #define MOUSEKEY_INTERVAL 20 // default 50
+
+// Fix for chattering cherry switches
+#undef DEBOUNCING_DELAY 
+#define DEBOUNCING_DELAY 15
 
 #endif
 
