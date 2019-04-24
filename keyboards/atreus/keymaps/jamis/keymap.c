@@ -1,5 +1,10 @@
 // this is the style you want to emulate.
 // This is the canonical layout file for the Quantum project. If you want to add another keyboard,
+//
+// Remember:
+// sudo apt install gcc-avr binutils-avr avr-libc
+// sudo apt install dfu-programmer dfu-util 
+// make atreus:jamis:avrdude 
 
 #include QMK_KEYBOARD_H
 #include "timer.h"
@@ -23,6 +28,9 @@
 #define TERM_6 LALT(KC_6)
 #define TERM_7 LALT(KC_7)
 #define TERM_8 LALT(KC_8)
+
+#define TERM_L LALT(KC_LEFT) 
+#define TERM_R LALT(KC_RIGHT)
 
 #define SW_WIN LCTL(KC_GRV) 
 
@@ -68,10 +76,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_MUTE, KC_VOLU, KC_NO,   KC_NO,   RESET,                     KC_NO,   KC_F1,   KC_F2,   KC_F3,   KC_F12  ,
     KC_CAPS, KC_VOLD, KC_LGUI, KC_TRNS, KC_LSFT, KC_LCTL, KC_LALT, KC_SPC,  TO(_QW), KC_PSCR, KC_SLCK, KC_PAUS ),
 
+// To jump left and right on a line, ctrl-left and ctrl-right: LCTL(KC_LEFT) or LCTL(KC_RIGHT)
 
   [_AD] = LAYOUT(
     TERM_1,  TERM_2,  TERM_3,   TERM_4,  TERM_5,                   KC_VOLU, KC_MS_BTN1, KC_MS_UP,   KC_MS_BTN2,  KC_BSPC, 
-    KC_HOME, LCTL(KC_LEFT), KC_UP, LCTL(KC_RGHT), TERM_6,          KC_VOLD, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, KC_DEL, 
+    KC_HOME, TERM_L,  KC_UP,    TERM_R,  TERM_6,                   KC_VOLD, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, KC_DEL, 
     KC_END,  KC_LEFT, KC_DOWN,  KC_RGHT, TERM_7,                   KC_MPLY, KC_MRWD,    KC_MFFD,    KC_NO,       KC_NO, 
     KC_NO,   KC_NO,   SW_WIN,   KC_TRNS, KC_LSFT, KC_LCTL, KC_LALT, KC_NO,   KC_TRNS,    KC_NO,      KC_NO,       KC_NO)
 };
@@ -147,7 +156,7 @@ uint32_t layer_state_set_user(uint32_t state) {
       rgblight_set();
       break;
     case _QW:
-      //rgblight_mode(8);
+      rgblight_mode(8);
       rgblight_setrgb(0,0,0);
       break;
     default:
@@ -159,20 +168,20 @@ uint32_t layer_state_set_user(uint32_t state) {
   return state;
 }
 
-//void rgblight_task(void) {
-//  static uint16_t derp_hue = 0;
-//  static uint8_t last_timer = 0;
-//
-//  if (timer_elapsed(last_timer) < 1) {
-//    return;
-//  }
-//  last_timer = timer_read();
-//
-//  derp_hue += 0x1F;
-//  
-//  if (layer_state == _QW) {
-//    rgblight_sethsv_at(derp_hue>>8, 255, 255, 0);
-//    rgblight_sethsv_at((derp_hue>>8)+127,255,255,1);
-//  }
-//
-//}
+void rgblight_task(void) {
+  static uint16_t derp_hue = 0;
+  static uint8_t last_timer = 0;
+
+  if (timer_elapsed(last_timer) < 1) {
+    return;
+  }
+  last_timer = timer_read();
+
+  derp_hue += 0x1F;
+  
+  if (layer_state == _QW) {
+    rgblight_sethsv_at(derp_hue>>8, 255, 255, 0);
+    rgblight_sethsv_at((derp_hue>>8)+127,255,255,1);
+  }
+
+}
