@@ -157,7 +157,7 @@ uint32_t layer_state_set_user(uint32_t state) {
       break;
     case _QW:
       rgblight_mode(8);
-      rgblight_setrgb(0,0,0);
+      //rgblight_setrgb(0,0,0);
       break;
     default:
       // Default layer stuff...
@@ -179,7 +179,7 @@ void rgblight_task(void) {
 
   derp_hue += 0x1F;
   
-  if (layer_state == _QW) {
+  if (biton32(layer_state) == _QW) {
     rgblight_sethsv_at(derp_hue>>8, 255, 255, 0);
     rgblight_sethsv_at((derp_hue>>8)+127,255,255,1);
   }
