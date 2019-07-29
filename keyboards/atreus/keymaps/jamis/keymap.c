@@ -14,11 +14,13 @@
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
 #define _QW 0
-#define _RS 1
-#define _LW 2
+#define _DV 1
+#define _RS 2
 #define _AD 3
+#define _LW 4
 
 // Custom Key names
+// These are for use with my i3wm config to allow me to move quickly between screens and panels
 #define TERM_1 LALT(KC_1)
 #define TERM_2 LALT(KC_2)
 #define TERM_3 LALT(KC_3)
@@ -32,6 +34,7 @@
 #define TERM_L LALT(KC_LEFT) 
 #define TERM_R LALT(KC_RIGHT)
 
+// This allows me to access ctrl-` for switching between windows under macOS (where ctrl is mapped to Command)
 #define SW_WIN LCTL(KC_GRV) 
 
 void matrix_init_user(void) { // Runs boot tasks for keyboard
@@ -46,10 +49,23 @@ void matrix_init_user(void) { // Runs boot tasks for keyboard
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+  /*
+   * I swapped the left Thumb positions to bring my thumbs closer to CTRL at rest.
+   *
+   * Holding backspace enter _AD Layer. Tap-and-hold starts repeating-backspace.
+   */
   [_QW] = LAYOUT( /* Qwerty */
     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P    ,
     KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN ,
     KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH ,
+    KC_ESC, KC_LGUI, KC_TAB,  LT(_AD, KC_BSPC), KC_LSFT,  KC_LCTL, KC_LALT, KC_SPC,  MO(_RS), KC_MINS, KC_QUOT, KC_ENT
+  ),
+
+
+  [_DV] = LAYOUT( /* Dvorak */
+    KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,                      KC_F,    KC_G,    KC_C,    KC_R,    KC_L,
+    KC_A,    KC_O,    KC_E,    KC_U,    KC_I,                      KC_D,    KC_H,    KC_T,    KC_N,    KC_S,
+    KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,                      KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,
     KC_ESC, KC_LGUI, KC_TAB,  LT(_AD, KC_BSPC), KC_LSFT,  KC_LCTL, KC_LALT, KC_SPC,  MO(_RS), KC_MINS, KC_QUOT, KC_ENT
   ),
 
@@ -63,8 +79,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_EXLM, KC_AT,   KC_UP,   KC_LCBR, KC_RCBR,                   KC_PGUP, KC_7,    KC_8,   KC_9, KC_ASTR ,
     KC_HASH, KC_LEFT, KC_DOWN, KC_RGHT, KC_DLR,                    KC_PGDN, KC_4,    KC_5,   KC_6, KC_PLUS ,
     KC_LBRC, KC_RBRC, KC_LPRN, KC_RPRN, KC_AMPR,                   KC_GRV,  KC_1,    KC_2,   KC_3, KC_BSLS ,
-    TG(_LW), KC_LGUI,  KC_INS, KC_TRNS, KC_LSFT, KC_LCTL, KC_LALT, KC_SPC,  KC_TRNS, KC_DOT, KC_0, KC_EQL  ),
+    TG(_LW), KC_LGUI,  KC_INS, KC_TRNS, KC_LSFT, KC_LCTL, KC_LALT, KC_SPC,  KC_TRNS, KC_DOT, KC_0, KC_EQL
+  ),
+  
   /*
+   * This is one of my most common layers. It lines up with my i3wm config to quickly switch spaces and move beween
+   * panels in a space.
+   *
+   * It also provides a second set of arrow keys for the left hand as well as mouse controls for the right hand.
+   *
+   * I wanted to fit a jump left and right on a line (ctrl-left and ctrl-right) in here somewhere but need to rethink 
+   * some things first. For that I'd use something like: LCTL(KC_LEFT) or LCTL(KC_RIGHT)
+   *
+   * Switching between
+   */
+  [_AD] = LAYOUT(
+    TERM_1,  TERM_2,  TERM_3,   TERM_4,  TERM_5,                   KC_VOLU, KC_MS_BTN1, KC_MS_UP,   KC_MS_BTN2,  KC_BSPC, 
+    KC_HOME, TERM_L,  KC_UP,    TERM_R,  TERM_6,                   KC_VOLD, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, KC_DEL, 
+    KC_END,  KC_LEFT, KC_DOWN,  KC_RGHT, TERM_7,                   KC_MPLY, KC_MRWD,    KC_MFFD,    KC_NO,       KC_NO, 
+    KC_NO,   KC_NO,   SW_WIN,   KC_TRNS, KC_LSFT, KC_LCTL, KC_LALT, KC_NO,   KC_TRNS,   KC_NO,      DF(_DV),     DF(_QW)
+  ),
+
+  /*
+   * I rarely use this layer. It needs work...
+   *
    * insert home   up  end   pgup       ||      up     F7    F8    F9   F10
    *  del   left  down right pgdn       ||     down    F4    F5    F6   F11
    *       volup             reset      ||             F1    F2    F3   F12
@@ -74,15 +112,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_INS,  KC_HOME, KC_UP,   KC_END,  KC_PGUP,                   KC_UP,   KC_F7,   KC_F8,   KC_F9,   KC_F10  ,
     KC_DELT, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN,                   KC_DOWN, KC_F4,   KC_F5,   KC_F6,   KC_F11  ,
     KC_MUTE, KC_VOLU, KC_NO,   KC_NO,   RESET,                     KC_NO,   KC_F1,   KC_F2,   KC_F3,   KC_F12  ,
-    KC_CAPS, KC_VOLD, KC_LGUI, KC_TRNS, KC_LSFT, KC_LCTL, KC_LALT, KC_SPC,  TO(_QW), KC_PSCR, KC_SLCK, KC_PAUS ),
+    KC_CAPS, KC_VOLD, KC_LGUI, KC_TRNS, KC_LSFT, KC_LCTL, KC_LALT, KC_SPC,  TO(_QW), KC_PSCR, KC_SLCK, KC_PAUS
+  )
 
-// To jump left and right on a line, ctrl-left and ctrl-right: LCTL(KC_LEFT) or LCTL(KC_RIGHT)
-
-  [_AD] = LAYOUT(
-    TERM_1,  TERM_2,  TERM_3,   TERM_4,  TERM_5,                   KC_VOLU, KC_MS_BTN1, KC_MS_UP,   KC_MS_BTN2,  KC_BSPC, 
-    KC_HOME, TERM_L,  KC_UP,    TERM_R,  TERM_6,                   KC_VOLD, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, KC_DEL, 
-    KC_END,  KC_LEFT, KC_DOWN,  KC_RGHT, TERM_7,                   KC_MPLY, KC_MRWD,    KC_MFFD,    KC_NO,       KC_NO, 
-    KC_NO,   KC_NO,   SW_WIN,   KC_TRNS, KC_LSFT, KC_LCTL, KC_LALT, KC_NO,   KC_TRNS,    KC_NO,      KC_NO,       KC_NO)
 };
 
 const uint16_t PROGMEM fn_actions[] = {
