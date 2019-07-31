@@ -34,6 +34,10 @@
 #define TERM_L LALT(KC_LEFT) 
 #define TERM_R LALT(KC_RIGHT)
 
+// Quickly jump left and right on a line (ctrl-left and ctrl-right)
+#define FAST_L LCTL(KC_LEFT)
+#define FAST_R LCTL(KC_RIGHT)
+
 // This allows me to access ctrl-` for switching between windows under macOS (where ctrl is mapped to Command)
 #define SW_WIN LCTL(KC_GRV) 
 
@@ -88,16 +92,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *
    * It also provides a second set of arrow keys for the left hand as well as mouse controls for the right hand.
    *
-   * I wanted to fit a jump left and right on a line (ctrl-left and ctrl-right) in here somewhere but need to rethink 
-   * some things first. For that I'd use something like: LCTL(KC_LEFT) or LCTL(KC_RIGHT)
-   *
-   * Switching between
    */
   [_AD] = LAYOUT(
     TERM_1,  TERM_2,  TERM_3,   TERM_4,  TERM_5,                   KC_VOLU, KC_MS_BTN1, KC_MS_UP,   KC_MS_BTN2,  KC_BSPC, 
-    KC_HOME, TERM_L,  KC_UP,    TERM_R,  TERM_6,                   KC_VOLD, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, KC_DEL, 
-    KC_END,  KC_LEFT, KC_DOWN,  KC_RGHT, TERM_7,                   KC_MPLY, KC_MRWD,    KC_MFFD,    KC_NO,       KC_NO, 
-    KC_NO,   KC_NO,   SW_WIN,   KC_TRNS, KC_LSFT, KC_LCTL, KC_LALT, KC_NO,   KC_TRNS,   KC_NO,      DF(_DV),     DF(_QW)
+    KC_HOME, FAST_L,  KC_UP,    FAST_R,  TERM_6,                   KC_VOLD, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, KC_DEL,
+    KC_END,  KC_LEFT, KC_DOWN,  KC_RGHT, TERM_7,                   KC_MPLY, KC_MRWD,    KC_MFFD,    KC_NO,       KC_NO,
+    TERM_L,  TERM_R,  SW_WIN,   KC_TRNS, KC_LSFT, KC_LCTL, KC_LALT, KC_NO,  KC_TRNS,    KC_NO,      DF(_DV),     DF(_QW)
   ),
 
   /*
