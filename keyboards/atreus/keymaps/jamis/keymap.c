@@ -38,6 +38,10 @@
 #define FAST_L LCTL(KC_LEFT)
 #define FAST_R LCTL(KC_RIGHT)
 
+// Delete words left and right of cursor (ctrl-backspace and ctrl-delete)
+#define WDEL_L LCTL(KC_BSPC)
+#define WDEL_R LCTL(KC_DEL)
+
 // This allows me to access ctrl-` for switching between windows under macOS (where ctrl is mapped to Command)
 #define SW_WIN LCTL(KC_GRV) 
 
@@ -96,7 +100,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_AD] = LAYOUT(
     TERM_1,  TERM_2,  TERM_3,   TERM_4,  TERM_5,                   KC_VOLU, KC_MS_BTN1, KC_MS_UP,   KC_MS_BTN2,  KC_BSPC, 
     KC_HOME, FAST_L,  KC_UP,    FAST_R,  TERM_6,                   KC_VOLD, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, KC_DEL,
-    KC_END,  KC_LEFT, KC_DOWN,  KC_RGHT, TERM_7,                   KC_MPLY, KC_MRWD,    KC_MFFD,    KC_NO,       KC_NO,
+    KC_END,  KC_LEFT, KC_DOWN,  KC_RGHT, TERM_7,                   KC_MPLY, KC_MRWD,    KC_MFFD,    WDEL_L,    WDEL_R,
     TERM_L,  TERM_R,  SW_WIN,   KC_TRNS, KC_LSFT, KC_LCTL, KC_LALT, KC_NO,  KC_TRNS,    KC_NO,      DF(_DV),     DF(_QW)
   ),
 
