@@ -22,8 +22,8 @@
 #define MOUSEKEY_INTERVAL 20 // default 50
 
 // Fix for chattering cherry switches
-#undef DEBOUNCING_DELAY 
-#define DEBOUNCING_DELAY 15
+#undef DEBOUNCE
+#define DEBOUNCE 15
 
 #endif
 
