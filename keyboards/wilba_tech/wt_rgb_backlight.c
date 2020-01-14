@@ -3019,13 +3019,13 @@ void backlight_effect_decrease(void)
 
 void backlight_effect_speed_increase(void)
 {
-    g_config.effect_speed = increment( g_config.effect_speed, 1, 0, 3 );
+    g_config.effect_speed = increment( g_config.effect_speed, 1, 0, 7 );
     backlight_config_save();
 }
 
 void backlight_effect_speed_decrease(void)
 {
-    g_config.effect_speed = decrement( g_config.effect_speed, 1, 0, 3 );
+    g_config.effect_speed = decrement( g_config.effect_speed, 1, 0, 7 );
     backlight_config_save();
 }
 
