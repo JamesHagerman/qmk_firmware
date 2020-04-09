@@ -86,8 +86,8 @@ enum layer_names {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_reviung39(
     LT(_I3, KC_TAB),   KC_Q,     KC_W,     KC_E,     KC_R,      KC_T,               KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_BSPC ,
-    KC_LCTL,           KC_A,     KC_S,     KC_D,     KC_F,      KC_G,               KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT ,
-    LSFT_T(KC_ESC),    KC_Z,     KC_X,     KC_C,     KC_V,      KC_B,               KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  KC_ENT  ,
+    LCTL_T(KC_ESC),    KC_A,     KC_S,     KC_D,     KC_F,      KC_G,               KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT ,
+    KC_LSFT,           KC_Z,     KC_X,     KC_C,     KC_V,      KC_B,               KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  KC_ENT  ,
                                                    LT(_LOWER, KC_BSPC),   KC_SPC,   LT(_RAISE, KC_SPC)
   ),
  
@@ -116,7 +116,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_I3] = LAYOUT_reviung39(
     XXXXXXX,   TERM_1,  TERM_2,   TERM_3,   TERM_4,   TERM_5,                  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
     KC_LSFT,   TERM_X,  TERM_U,   TERM_Y,   TERM_P,   TERM_6,                  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  I3_BROW,
-    TERM_Y,    TERM_L,  TERM_D,   TERM_R,   TERM_C,   TERM_7,                  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  I3_TERM,
+    KC_LSFT,   TERM_L,  TERM_D,   TERM_R,   TERM_C,   TERM_7,                  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  I3_TERM,
                                                        _______,  TG(_ADJUST),  _______
   ),
 
